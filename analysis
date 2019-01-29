@@ -1,0 +1,16 @@
+library(tidyverse)
+
+# Removing the top part of the labels in the dataset
+wineDataset = winemag.data_first150k[-1,]
+
+# Make the continuous data continuous
+wineDataset[,5] = as.numeric(wineDataset[,5]) + 79
+wineDataset[,6] = as.numeric(wineDataset[,6])
+
+# Creating histograms to get a better look at how the data is distributed 
+ggplot(data = wineDataset, aes(x = V5)) + geom_histogram(bins = 20) + theme_classic()
+ggplot(data = wineDataset, aes(x = V6)) + geom_histogram(bins = 35) + theme_classic()
+
+
+# Creating a ranking/price ratio
+wineDataset$ratio= wineDataset[,5]/wineDataset[,6]
